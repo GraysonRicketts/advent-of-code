@@ -3,7 +3,7 @@ const data = [1686, 1337, 1780, 1305, 1341, 1120, 1197, 1786, 1819, 1414, 1714, 
 console.log('Two number additions')
 let sum = 0;
 // Brute force solution
-for (let x = 0; x < data.length - 2; x++) {
+for (let x = 0; x < data.length - 1; x++) {
   for (let y = x + 1; y < data.length; y++) {
     sum = data[x] + data[y];
     if (sum === 2020) {
@@ -17,9 +17,9 @@ for (let x = 0; x < data.length - 2; x++) {
 
 console.log('\n\nThree number addition')
 sum = 0;
-for (let x = 0; x < data.length - 3; x++) {
-  for (let y = x + 1; y < data.length - 2; y++) {
-    for (let z = y + 1; z < data.length - 1; z++) {
+for (let x = 0; x < data.length - 2; x++) {
+  for (let y = x + 1; y < data.length - 1; y++) {
+    for (let z = y + 1; z < data.length; z++) {
       sum = data[x] + data[y] + data[z];
       if (sum === 2020) {
         console.log(`
@@ -31,3 +31,5 @@ for (let x = 0; x < data.length - 3; x++) {
     }
   }
 }
+
+export { }
