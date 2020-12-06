@@ -6,5 +6,9 @@
     "removeComments": false,
     "sourceMap": true,
     "outDir": "dist"
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules"
+  ]
 }
