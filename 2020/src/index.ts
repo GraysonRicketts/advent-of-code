@@ -1,3 +1,3 @@
-import { main } from './day3/index'
+import { main } from './day4/index'
 
 main()

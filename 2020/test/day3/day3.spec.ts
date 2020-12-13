@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun } from './../src/day3';
+import { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun } from '../../src/day3/day3';
 
 
 describe('day 3', () => {
