@@ -1,18 +1,18 @@
 /** byr (Birth Year) - four digits; at least 1920 and at most 2002. */
 function isBirthYearValid(value: string): boolean {
-  const byr = parseInt(value, 2);
+  const byr = parseInt(value, 10);
   return byr >= 1920 && byr <= 2002;
 }
 
 /** iyr (Issue Year) - four digits; at least 2010 and at most 2020. */
 function isIssueYearValid(value: string): boolean {
-  const iyr = parseInt(value, 2);
+  const iyr = parseInt(value, 10);
   return iyr >= 2010 && iyr <= 2020;
 }
 
 /** eyr (Expiration Year) - four digits; at least 2020 and at most 2030. */
 function isExpirationYearValid(value: string): boolean {
-  const eyr = parseInt(value, 2);
+  const eyr = parseInt(value, 10);
   return eyr >= 2020 && eyr <= 2030;
 }
 
@@ -25,7 +25,7 @@ function isHeightValid(value: string): boolean {
   const postfix = value.slice(-2);
   const prefix = value.slice(0, value.length - 2);
 
-  const num = parseInt(prefix, 2);
+  const num = parseInt(prefix, 10);
   if (postfix === 'cm') {
     return num >= 150 && num <= 193;
   }
@@ -56,7 +56,7 @@ function isPassportIdValid(value: string): boolean {
 
   let number;
   try {
-    number = parseInt(value, 2);
+    number = parseInt(value, 10);
   } catch (err) {
     return false;
   }
@@ -102,16 +102,16 @@ class Document {
   }
 
   private areValuesValid(): boolean {
-    const invalidFields = this.fields.filter(f => !isFieldValid(f));
+    const invalidFields = this.fields.filter((f) => !isFieldValid(f));
 
     return invalidFields.length === 0;
   }
 
   public hasRequiredFields(optionalFields?: string[]): boolean {
-    let remainingReqFields = this.requiredFields.filter(f => !optionalFields?.includes(f));
+    let remainingReqFields = this.requiredFields.filter((f) => !optionalFields?.includes(f));
 
-    const fieldNames = this.fields.map(f => f.fieldName);
-    remainingReqFields = remainingReqFields.filter(ef => !fieldNames.includes(ef));
+    const fieldNames = this.fields.map((f) => f.fieldName);
+    remainingReqFields = remainingReqFields.filter((ef) => !fieldNames.includes(ef));
 
     return remainingReqFields.length === 0;
   }

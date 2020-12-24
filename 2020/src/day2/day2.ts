@@ -1012,8 +1012,8 @@ function parseLine(line: string): PasswordLine {
 
   // parse text
   const boundaries = splitLine[0].split('-');
-  const firstNumber = parseInt(boundaries[0], 2);
-  const secondNumber = parseInt(boundaries[1], 2);
+  const firstNumber = parseInt(boundaries[0], 10);
+  const secondNumber = parseInt(boundaries[1], 10);
   const letter = splitLine[1][0];
   const password = splitLine[2];
 
@@ -1026,14 +1026,18 @@ function parseLine(line: string): PasswordLine {
 }
 
 function isTaskOnePasswordValid(pswrdLine: PasswordLine): boolean {
-  const { password, letter, firstNumber, secondNumber } = pswrdLine;
-  const letterCount = password.split('').filter(c => c === letter).length;
+  const {
+    password, letter, firstNumber, secondNumber,
+  } = pswrdLine;
+  const letterCount = password.split('').filter((c) => c === letter).length;
 
   return letterCount <= secondNumber && letterCount >= firstNumber;
 }
 
 function isTaskTwoPasswordValid(pswrdLine: PasswordLine): boolean {
-  const { firstNumber, secondNumber, letter, password } = pswrdLine;
+  const {
+    firstNumber, secondNumber, letter, password,
+  } = pswrdLine;
 
   const letterOne = password[firstNumber - 1];
   const letterTwo = password[secondNumber - 1];

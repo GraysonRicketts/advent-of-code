@@ -338,7 +338,7 @@ function main() {
     { x: 7, y: 1 },
     { x: 1, y: 2 },
   ];
-  const treePerRun = slopes.map(s => getTreesInRun(run, s));
+  const treePerRun = slopes.map((s) => getTreesInRun(run, s));
   const output = treePerRun.reduce((prev, curr) => prev * curr);
   console.log(treePerRun);
   console.log(output);

@@ -1,10 +1,12 @@
 import { expect } from 'chai';
-import { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun } from '../../src/day3/day3';
+import {
+  parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun,
+} from '../../src/day3/day3';
 
 describe('day 3', () => {
   describe('parseFieldInput', () => {
     it('Should parse the field input', () => {
-      const field = '..##' + '\n#...' + '\n..##';
+      const field = '..##\n#...\n..##';
 
       const expected = [
         [new Snow(), new Snow(), new Tree(), new Tree()],

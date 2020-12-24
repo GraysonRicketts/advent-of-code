@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Document } from '../../src/day4/Document';
-import { parseInput } from '../../src/day4/parser';
+import parseInput from '../../src/day4/parser';
 
 describe('parser', () => {
   describe('parseInput', () => {
