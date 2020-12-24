@@ -1026,23 +1026,14 @@ function parseLine(line: string): PasswordLine {
 }
 
 function isTaskOnePasswordValid(pswrdLine: PasswordLine): boolean {
-  const {
-    password, letter, firstNumber, secondNumber,
-  } = pswrdLine;
-  const letterCount = password.split('')
-    .filter((c) => c === letter)
-    .length;
+  const { password, letter, firstNumber, secondNumber } = pswrdLine;
+  const letterCount = password.split('').filter(c => c === letter).length;
 
   return letterCount <= secondNumber && letterCount >= firstNumber;
 }
 
 function isTaskTwoPasswordValid(pswrdLine: PasswordLine): boolean {
-  const {
-    firstNumber,
-    secondNumber,
-    letter,
-    password,
-  } = pswrdLine;
+  const { firstNumber, secondNumber, letter, password } = pswrdLine;
 
   const letterOne = password[firstNumber - 1];
   const letterTwo = password[secondNumber - 1];
@@ -1086,4 +1077,4 @@ console.log(`Valid passwords (task 1): ${task1validPasswords}`);
 // eslint-disable-next-line no-console
 console.log(`Valid passwords (task 2): ${task2validPasswords}`);
 
-export { };
+export {};

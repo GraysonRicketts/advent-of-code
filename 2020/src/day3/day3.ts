@@ -3,7 +3,7 @@ import Snow from './Snow';
 import Tree from './Tree';
 
 class Field {
-  constructor(private topologies: Topology[][]) { }
+  constructor(private topologies: Topology[][]) {}
 
   public getPosition(x: number, y: number): Topology {
     return this.topologies[y][x % this.topologies[y].length];
@@ -35,7 +35,7 @@ function mapCharToTopogoly(char: string) {
 
 function parseFieldInput(input: string): Topology[][] {
   const rows = input.split('\n');
-  const topology = rows.map((r) => {
+  const topology = rows.map(r => {
     const topologyRow = [];
     const spaces = r.split('');
     // eslint-disable-next-line no-restricted-syntax
@@ -54,9 +54,7 @@ function getTreesInRun(input: string, slope: Slope): number {
   const field = new Field(topo);
   const run = sledRide(slope, field);
 
-  return run.filter((s) => s instanceof Tree).length;
+  return run.filter(s => s instanceof Tree).length;
 }
 
-export {
-  parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun,
-};
+export { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun };

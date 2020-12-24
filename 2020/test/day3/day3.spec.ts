@@ -1,18 +1,16 @@
 import { expect } from 'chai';
-import {
-  parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun,
-} from '../../src/day3/day3';
+import { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun } from '../../src/day3/day3';
 
 describe('day 3', () => {
   describe('parseFieldInput', () => {
     it('Should parse the field input', () => {
-      const field = '..##'
-        + '\n#...'
-        + '\n..##';
+      const field = '..##' + '\n#...' + '\n..##';
 
-      const expected = [[new Snow(), new Snow(), new Tree(), new Tree()], [
-        new Tree(), new Snow(), new Snow(), new Snow(),
-      ], [new Snow(), new Snow(), new Tree(), new Tree()]];
+      const expected = [
+        [new Snow(), new Snow(), new Tree(), new Tree()],
+        [new Tree(), new Snow(), new Snow(), new Snow()],
+        [new Snow(), new Snow(), new Tree(), new Tree()],
+      ];
       const output = parseFieldInput(field);
       expect(output).to.deep.equal(expected);
       expect(output[0][0]).to.be.instanceOf(Snow);
@@ -25,9 +23,11 @@ describe('day 3', () => {
   describe('Field', () => {
     let field: Field;
     beforeEach(() => {
-      field = new Field([[new Snow(), new Snow(), new Tree(), new Tree()], [
-        new Tree(), new Snow(), new Snow(), new Snow(),
-      ], [new Snow(), new Snow(), new Tree(), new Tree()]]);
+      field = new Field([
+        [new Snow(), new Snow(), new Tree(), new Tree()],
+        [new Tree(), new Snow(), new Snow(), new Snow()],
+        [new Snow(), new Snow(), new Tree(), new Tree()],
+      ]);
     });
 
     describe('isPositionOpen', () => {
@@ -55,7 +55,8 @@ describe('day 3', () => {
       field = new Field([
         [new Snow(), new Snow(), new Tree(), new Tree()],
         [new Tree(), new Snow(), new Snow(), new Snow()],
-        [new Snow(), new Snow(), new Tree(), new Tree()]]);
+        [new Snow(), new Snow(), new Tree(), new Tree()],
+      ]);
     });
 
     it('Should get simple ride', () => {

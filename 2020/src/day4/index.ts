@@ -4,13 +4,13 @@ import input from './input';
 function countHasRequiredFieldsPassports(passports: string, optionalFields: string[]): number {
   const documents = parseInput(passports);
 
-  return documents.filter((d) => d.hasRequiredFields(optionalFields)).length;
+  return documents.filter(d => d.hasRequiredFields(optionalFields)).length;
 }
 
 function countValidPassports(passports: string, optionalFields: string[]): number {
   const documents = parseInput(passports);
 
-  return documents.filter((d) => d.isValid(optionalFields)).length;
+  return documents.filter(d => d.isValid(optionalFields)).length;
 }
 
 function main() {

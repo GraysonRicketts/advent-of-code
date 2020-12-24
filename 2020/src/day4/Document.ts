@@ -28,7 +28,8 @@ function isHeightValid(value: string): boolean {
   const num = parseInt(prefix, 2);
   if (postfix === 'cm') {
     return num >= 150 && num <= 193;
-  } if (postfix === 'in') {
+  }
+  if (postfix === 'in') {
     return num >= 59 && num <= 76;
   }
 
@@ -65,13 +66,20 @@ function isPassportIdValid(value: string): boolean {
 
 function isFieldValid(field: DocumentField): boolean {
   switch (field.fieldName) {
-    case 'byr': return isBirthYearValid(field.value);
-    case 'iyr': return isIssueYearValid(field.value);
-    case 'eyr': return isExpirationYearValid(field.value);
-    case 'hgt': return isHeightValid(field.value);
-    case 'hcl': return isHairColorValid(field.value);
-    case 'ecl': return isEyeColorValid(field.value);
-    case 'pid': return isPassportIdValid(field.value);
+    case 'byr':
+      return isBirthYearValid(field.value);
+    case 'iyr':
+      return isIssueYearValid(field.value);
+    case 'eyr':
+      return isExpirationYearValid(field.value);
+    case 'hgt':
+      return isHeightValid(field.value);
+    case 'hcl':
+      return isHairColorValid(field.value);
+    case 'ecl':
+      return isEyeColorValid(field.value);
+    case 'pid':
+      return isPassportIdValid(field.value);
     default:
       return true;
   }
@@ -94,16 +102,16 @@ class Document {
   }
 
   private areValuesValid(): boolean {
-    const invalidFields = this.fields.filter((f) => !isFieldValid(f));
+    const invalidFields = this.fields.filter(f => !isFieldValid(f));
 
     return invalidFields.length === 0;
   }
 
   public hasRequiredFields(optionalFields?: string[]): boolean {
-    let remainingReqFields = this.requiredFields.filter((f) => !optionalFields?.includes(f));
+    let remainingReqFields = this.requiredFields.filter(f => !optionalFields?.includes(f));
 
-    const fieldNames = this.fields.map((f) => f.fieldName);
-    remainingReqFields = remainingReqFields.filter((ef) => !fieldNames.includes(ef));
+    const fieldNames = this.fields.map(f => f.fieldName);
+    remainingReqFields = remainingReqFields.filter(ef => !fieldNames.includes(ef));
 
     return remainingReqFields.length === 0;
   }
