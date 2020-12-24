@@ -954,6 +954,6 @@ eyr:2027 byr:1955
 hcl:#95f96b
 hgt:193cm iyr:2020 pid:719337690
 byr:1971
-ecl:brn eyr:2024`
+ecl:brn eyr:2024`;
 
-export { input };
+export default input;

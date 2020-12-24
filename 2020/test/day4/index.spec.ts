@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { countValidPassports, countHasRequiredFieldsPassports } from './../../src/day4';
+import { countValidPassports, countHasRequiredFieldsPassports } from '../../src/day4';
 
 describe('day 4', () => {
   describe('#countHasRequiredFieldsPassports', () => {
@@ -17,11 +17,11 @@ hgt:179cm
 
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in`;
-      const optionalFields = ['cid']
+      const optionalFields = ['cid'];
       const output = countHasRequiredFieldsPassports(input, optionalFields);
       expect(output).to.eql(2);
-    })
-  })
+    });
+  });
 
   describe('#countValidPassports', () => {
     it('Should detect invalid passports', () => {
@@ -41,7 +41,7 @@ pid:3556412378 byr:2007`;
 
       const output = countValidPassports(input, ['cid']);
       expect(output).to.eql(0);
-    })
+    });
 
     it('Should detect valid passports', () => {
       const input = `pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
@@ -59,6 +59,6 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719`;
 
       const output = countValidPassports(input, ['cid']);
       expect(output).to.eql(4);
-    })
-  })
-})
+    });
+  });
+});

@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import { Document } from "../../src/day4/Document";
+import { expect } from 'chai';
+import { Document } from '../../src/day4/Document';
 
 describe('Document', () => {
   describe('#isValid', () => {
@@ -12,12 +12,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(true);
-    })
+    });
     it('Should return true if all required fields exist and optional exists', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -27,12 +27,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(true);
-    })
+    });
     it('Should return true if all required fields exist and optional does not', () => {
       const doc = new Document([
         { fieldName: 'iyr', value: '2013' },
@@ -46,7 +46,7 @@ describe('Document', () => {
 
       const output = doc.isValid(['hgt']);
       expect(output).eql(true);
-    })
+    });
     it('Should return false if all required fields do not exist', () => {
       const doc = new Document([
         { fieldName: 'iyr', value: '2013' },
@@ -60,7 +60,7 @@ describe('Document', () => {
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if birth year is out of range', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -70,12 +70,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1837' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if issue year is out of range', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -85,12 +85,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '1917' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if expiration year is out of range', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -100,12 +100,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if height (cm) is out of range', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -115,12 +115,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '203cm' }
+        { fieldName: 'hgt', value: '203cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if height (in) is out of range', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -130,12 +130,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '50in' }
+        { fieldName: 'hgt', value: '50in' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if hair color is invalid', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -145,12 +145,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if eye color is invalid', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'lol' },
@@ -160,12 +160,12 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
+    });
     it('Should return false if passport id is invalid', () => {
       const doc = new Document([
         { fieldName: 'ecl', value: 'gry' },
@@ -175,11 +175,11 @@ describe('Document', () => {
         { fieldName: 'byr', value: '1937' },
         { fieldName: 'iyr', value: '2017' },
         { fieldName: 'cid', value: '147' },
-        { fieldName: 'hgt', value: '183cm' }
+        { fieldName: 'hgt', value: '183cm' },
       ]);
 
       const output = doc.isValid();
       expect(output).eql(false);
-    })
-  })
-})
+    });
+  });
+});

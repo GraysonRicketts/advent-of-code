@@ -1,18 +1,6 @@
-abstract class Topology {
-  abstract isOpen(): boolean;
-}
-
-class Tree extends Topology {
-  isOpen(): boolean {
-    return false;
-  }
-}
-
-class Snow extends Topology {
-  isOpen(): boolean {
-    return true;
-  }
-}
+import Topology from './Topology';
+import Snow from './Snow';
+import Tree from './Tree';
 
 class Field {
   constructor(private topologies: Topology[][]) { }
@@ -46,17 +34,18 @@ function mapCharToTopogoly(char: string) {
 }
 
 function parseFieldInput(input: string): Topology[][] {
-  let topology = [];
   const rows = input.split('\n');
-  for (const r of rows) {
+  const topology = rows.map((r) => {
     const topologyRow = [];
     const spaces = r.split('');
+    // eslint-disable-next-line no-restricted-syntax
     for (const s of spaces) {
       topologyRow.push(mapCharToTopogoly(s));
     }
 
-    topology.push(topologyRow);
-  }
+    return topologyRow;
+  });
+
   return topology;
 }
 
@@ -65,7 +54,9 @@ function getTreesInRun(input: string, slope: Slope): number {
   const field = new Field(topo);
   const run = sledRide(slope, field);
 
-  return run.filter(s => s instanceof Tree).length;
+  return run.filter((s) => s instanceof Tree).length;
 }
 
-export { parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun }
+export {
+  parseFieldInput, Snow, Tree, Field, sledRide, getTreesInRun,
+};

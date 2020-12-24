@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-import { Document } from './../../src/day4/Document';
-import { parseInput } from './../../src/day4/parser';
+import { Document } from '../../src/day4/Document';
+import { parseInput } from '../../src/day4/parser';
 
 describe('parser', () => {
   describe('parseInput', () => {
     it('Should take string and turn into documents', () => {
-
       const input = `ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm
 
@@ -28,7 +27,7 @@ iyr:2011 ecl:brn hgt:59in`;
           { fieldName: 'byr', value: '1937' },
           { fieldName: 'iyr', value: '2017' },
           { fieldName: 'cid', value: '147' },
-          { fieldName: 'hgt', value: '183cm' }
+          { fieldName: 'hgt', value: '183cm' },
         ]),
         new Document([
           { fieldName: 'iyr', value: '2013' },
@@ -46,7 +45,7 @@ iyr:2011 ecl:brn hgt:59in`;
           { fieldName: 'ecl', value: 'brn' },
           { fieldName: 'pid', value: '760753108' },
           { fieldName: 'byr', value: '1931' },
-          { fieldName: 'hgt', value: '179cm' }
+          { fieldName: 'hgt', value: '179cm' },
         ]),
         new Document([
           { fieldName: 'hcl', value: '#cfa07d' },
@@ -54,11 +53,11 @@ iyr:2011 ecl:brn hgt:59in`;
           { fieldName: 'pid', value: '166559648' },
           { fieldName: 'iyr', value: '2011' },
           { fieldName: 'ecl', value: 'brn' },
-          { fieldName: 'hgt', value: '59in' }
-        ])
-      ]
-      const output = parseInput(input)
+          { fieldName: 'hgt', value: '59in' },
+        ]),
+      ];
+      const output = parseInput(input);
       expect(output).eql(expected);
-    })
-  })
-})
+    });
+  });
+});

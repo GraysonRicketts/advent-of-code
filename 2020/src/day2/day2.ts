@@ -1,5 +1,4 @@
-const data =
-  `3-7 r: mxvlzcjrsqst
+const data = `3-7 r: mxvlzcjrsqst
 1-3 c: ccpc
 6-12 f: mqcccdhxfbrhfpf
 14-15 l: llllllllllllldgll
@@ -1013,8 +1012,8 @@ function parseLine(line: string): PasswordLine {
 
   // parse text
   const boundaries = splitLine[0].split('-');
-  const firstNumber = parseInt(boundaries[0]);
-  const secondNumber = parseInt(boundaries[1]);
+  const firstNumber = parseInt(boundaries[0], 2);
+  const secondNumber = parseInt(boundaries[1], 2);
   const letter = splitLine[1][0];
   const password = splitLine[2];
 
@@ -1022,14 +1021,16 @@ function parseLine(line: string): PasswordLine {
     firstNumber,
     secondNumber,
     letter,
-    password
-  }
+    password,
+  };
 }
 
 function isTaskOnePasswordValid(pswrdLine: PasswordLine): boolean {
-  const { password, letter, firstNumber, secondNumber } = pswrdLine;
+  const {
+    password, letter, firstNumber, secondNumber,
+  } = pswrdLine;
   const letterCount = password.split('')
-    .filter(c => c === letter)
+    .filter((c) => c === letter)
     .length;
 
   return letterCount <= secondNumber && letterCount >= firstNumber;
@@ -1040,7 +1041,7 @@ function isTaskTwoPasswordValid(pswrdLine: PasswordLine): boolean {
     firstNumber,
     secondNumber,
     letter,
-    password
+    password,
   } = pswrdLine;
 
   const letterOne = password[firstNumber - 1];
@@ -1060,27 +1061,29 @@ function isTaskTwoPasswordValid(pswrdLine: PasswordLine): boolean {
 const unparsedLines = data.split('\n');
 let task1validPasswords = 0;
 let task2validPasswords = 0;
-for (let lineNum = 0; lineNum < unparsedLines.length; lineNum++) {
+for (let lineNum = 0; lineNum < unparsedLines.length; lineNum += 1) {
   const parsedLine = parseLine(unparsedLines[lineNum]);
 
   if (isTaskOnePasswordValid(parsedLine)) {
-    task1validPasswords++;
+    task1validPasswords += 1;
   }
 
   if (isTaskTwoPasswordValid(parsedLine)) {
-    task2validPasswords++;
+    task2validPasswords += 1;
   } else {
     const { password, firstNumber, secondNumber } = parsedLine;
+    // eslint-disable-next-line no-console
     console.log({
       ...parsedLine,
       letterOne: password[firstNumber - 1],
-      letterTwo: password[secondNumber - 1]
-    })
+      letterTwo: password[secondNumber - 1],
+    });
   }
 }
 
-console.log(`Valid passwords (task 1): ${task1validPasswords}`)
-console.log(`Valid passwords (task 2): ${task2validPasswords}`)
+// eslint-disable-next-line no-console
+console.log(`Valid passwords (task 1): ${task1validPasswords}`);
+// eslint-disable-next-line no-console
+console.log(`Valid passwords (task 2): ${task2validPasswords}`);
 
-
-export { }
+export { };
