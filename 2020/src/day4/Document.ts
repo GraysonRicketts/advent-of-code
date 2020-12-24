@@ -10,7 +10,7 @@ class Document {
   }
 
   public isValid(optionalFields?: string[]): boolean {
-    return this.hasRequiredFields() && this.areValuesValid();
+    return this.hasRequiredFields(optionalFields) && this.areValuesValid();
   }
 
   private areValuesValid(): boolean {
@@ -28,7 +28,6 @@ class Document {
       case 'hcl': return this.isHairColorValid(field.value);
       case 'ecl': return this.isEyeColorValid(field.value);
       case 'pid': return this.isPassportIdValid(field.value);
-      case 'cid': return this.isCountryIdValid(field.value);
       default:
         return true;
     }
@@ -73,25 +72,33 @@ class Document {
 
   /** hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f. */
   private isHairColorValid(value: string): boolean {
-    return
+    const reg = /^#([0-9]|[a-f]){6}$/
+    return reg.test(value);
   }
 
   /** ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth. */
   private isEyeColorValid(value: string): boolean {
-    return true;
+    const colors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+    return colors.includes(value);
   }
 
   /** pid (Passport ID) - a nine-digit number, including leading zeroes. */
   private isPassportIdValid(value: string): boolean {
-    return true;
+    if (value.length < 9) {
+      return false;
+    }
+
+    let number;
+    try {
+      number = parseInt(value);
+    } catch (err) {
+      return false;
+    }
+
+    return number <= 999999999;
   }
 
-  /** cid (Country ID) - ignored, missing or not. */
-  private isCountryIdValid(value: string): boolean {
-    return true;
-  }
-
-  private hasRequiredFields(optionalFields?: string[]): boolean {
+  public hasRequiredFields(optionalFields?: string[]): boolean {
     let remainingReqFields = this.requiredFields.filter(f => !optionalFields?.includes(f));
 
     const fieldNames = this.fields.map(f => f.fieldName);
