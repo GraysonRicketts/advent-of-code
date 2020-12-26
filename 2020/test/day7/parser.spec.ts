@@ -30,5 +30,18 @@ dotted black bags contain no other bags.`;
       expect(output[0].color).to.eql('dotted black');
       expect(output[0].rules).to.eql(undefined);
     });
+
+    it('should work with expected input', () => {
+      const rule = 'striped violet bags contain 2 dotted olive bags, 2 dotted red bags, 4 shiny gold bags.';
+
+      const output = parseInput(rule);
+      expect(output[0].color).to.eql('striped violet');
+      expect(output[0].rules?.has('dotted olive'));
+      expect(output[0].rules?.get('dotted olive')).to.eql({ count: 2, bagColor: 'dotted olive' });
+      expect(output[0].rules?.has('dotted red'));
+      expect(output[0].rules?.get('dotted red')).to.eql({ count: 2, bagColor: 'dotted red' });
+      expect(output[0].rules?.has('shiny gold'));
+      expect(output[0].rules?.get('shiny gold')).to.eql({ count: 4, bagColor: 'shiny gold' });
+    });
   });
 });

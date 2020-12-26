@@ -15,7 +15,7 @@ function parseInput(input: string): Bag[] {
       return { color };
     }
 
-    const unparsedRules = splitLine[1].split(',');
+    const unparsedRules = splitLine[1].split(', ');
     const rules = new Map<string, Rule>();
     unparsedRules.forEach((r) => {
       const splitRules = r.split(' ');

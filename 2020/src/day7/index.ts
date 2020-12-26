@@ -3,18 +3,20 @@ import createBagGraph, { BagNode } from './BagGraph';
 import parseInput from './parser';
 import bagInput from './bagInput';
 
-function countContains(graph: Map<string, BagNode>, color: string): number {
-  let count = 0;
-
+function getContainedIn(
+  graph: Map<string, BagNode>, color: string, containedIn: Set<string>,
+): Set<string> {
   const node = graph.get(color);
   if (node) {
-    count += node.containedIn?.length || 0;
     node.containedIn?.forEach((parent) => {
-      count += countContains(graph, parent);
+      getContainedIn(graph, parent, new Set()).forEach((v) => {
+        containedIn.add(v);
+      });
+      containedIn.add(parent);
     });
   }
 
-  return count;
+  return containedIn;
 }
 
 function countContainsBagColor(
@@ -22,8 +24,12 @@ function countContainsBagColor(
 ): number {
   const parsedBags = parseInput(rules);
   const graph = createBagGraph(parsedBags);
+  console.log({ stripedViolet: graph.get('striped violet')?.bag.rules });
 
-  return countContains(graph, bagColor);
+  const totalContainedIn = getContainedIn(graph, bagColor, new Set<string>());
+  console.log({ totalContainedIn });
+
+  return totalContainedIn.size;
 }
 
 function main() {
