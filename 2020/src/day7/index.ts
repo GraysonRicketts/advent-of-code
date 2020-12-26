@@ -24,16 +24,38 @@ function countContainsBagColor(
 ): number {
   const parsedBags = parseInput(rules);
   const graph = createBagGraph(parsedBags);
-  console.log({ stripedViolet: graph.get('striped violet')?.bag.rules });
 
   const totalContainedIn = getContainedIn(graph, bagColor, new Set<string>());
-  console.log({ totalContainedIn });
 
   return totalContainedIn.size;
 }
 
-function main() {
-  console.log(`Part 1: ${countContainsBagColor(bagInput, 'shiny gold')}`);
+function countNested(graph: Map<string, BagNode>, color: string, countAbove: number): number {
+  const node = graph.get(color);
+  if (!node) {
+    throw new Error(`Node should exist: ${color}`);
+  }
+
+  let count = 1;
+  node.bag.rules?.forEach((r) => {
+    count += countNested(graph, r.bagColor, r.count);
+  });
+
+  return count * countAbove;
 }
 
-export { main, countContainsBagColor };
+function countNumberOfNestBages(rules: string, bagColor: string): number {
+  const parsedBags = parseInput(rules);
+  const graph = createBagGraph(parsedBags);
+
+  // minus one because we don't consider the bagColor as a counted bag
+  const totalNested = countNested(graph, bagColor, 1) - 1;
+  return totalNested;
+}
+
+function main() {
+  console.log(`Part 1: ${countContainsBagColor(bagInput, 'shiny gold')}`);
+  console.log(`Part 2: ${countNumberOfNestBages(bagInput, 'shiny gold')}`);
+}
+
+export { main, countContainsBagColor, countNumberOfNestBages };
