@@ -54,27 +54,42 @@ fn get_infinite_accumulator(input: String) -> i32 {
     let mut accum: i32 = 0;
     let mut pos: usize = 0;
 
-    let visited_pos: HashSet<usize> = HashSet::new();
+    let mut visited_pos: HashSet<usize> = HashSet::new();
 
     let final_accum = loop {
         if visited_pos.contains(&pos) {
+            println!("pos: {}, op: {:?}", pos, visited_pos);
             break accum;
         }
+        visited_pos.insert(pos);
 
         let curr_op = &ops[pos];
-        if curr_op.op == OperationType::ACC {
-            accum += curr_op.num;
-            pos += 1;
-        } else {
-            pos += if curr_op.op == OperationType::NOP {
-                1
-            } else {
-                usize::try_from(curr_op.num).unwrap() - 1
-            };
+        println!("op: {:?}", curr_op);
+        match curr_op.op {
+            OperationType::ACC => {
+                accum += curr_op.num;
+                pos += 1;
+            }
+            OperationType::NOP => pos += 1,
+            OperationType::JMP => {
+                let is_neg = curr_op.num > 0;
+                let u_jmp_num = if is_neg {
+                    curr_op.num - 1
+                } else {
+                    (curr_op.num * -1) + 1
+                };
+
+                let pos_shift = usize::try_from(u_jmp_num).unwrap();
+                if is_neg {
+                    pos += pos_shift;
+                } else {
+                    pos -= pos_shift;
+                }
+            }
         }
 
         // issue is because pos is only positive so can't move backwards
-        println!("acc: {}, pos: {}", accum, pos)
+        println!("acc: {}, pos: {}, op: {:?}", accum, pos, curr_op)
     };
 
     return final_accum;
@@ -113,7 +128,10 @@ acc +1
 jmp +4
 acc +3
 jmp -3
-acc -99",
+acc -99
+acc +1
+jmp -4
+acc +6",
         );
         let output = get_infinite_accumulator(input);
         assert_eq!(output, 5);
